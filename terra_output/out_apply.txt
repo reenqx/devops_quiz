@@ -1,0 +1,132 @@
+PS C:\Users\NURIN\Downloads\devopstest> terraform apply -auto-approve  
+
+Terraform used the selected providers to generate the following execution plan.    
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # docker_container.my_container will be created
+  + resource "docker_container" "my_container" {
+      + attach                                      = false
+      + bridge                                      = (known after apply)
+      + command                                     = (known after apply)
+      + container_logs                              = (known after apply)
+      + container_read_refresh_timeout_milliseconds = 15000
+      + entrypoint                                  = (known after apply)
+      + env                                         = (known after apply)
+      + exit_code                                   = (known after apply)
+      + hostname                                    = (known after apply)
+      + id                                          = (known after apply)
+      + image                                       = "node"
+      + init                                        = (known after apply)
+      + ipc_mode                                    = (known after apply)
+      + log_driver                                  = (known after apply)
+      + logs                                        = false
+      + must_run                                    = true
+      + name                                        = "my-express-app"
+      + network_data                                = (known after apply)
+      + read_only                                   = false
+      + remove_volumes                              = true
+      + restart                                     = "no"
+      + rm                                          = false
+      + runtime                                     = (known after apply)
+      + security_opts                               = (known after apply)
+      + shm_size                                    = (known after apply)
+      + start                                       = true
+      + stdin_open                                  = false
+      + stop_signal                                 = (known after apply)
+      + stop_timeout                                = (known after apply)
+      + tty                                         = false
+      + wait                                        = false
+      + wait_timeout                                = 60
+
+      + healthcheck (known after apply)
+
+      + labels (known after apply)
+
+      + ports {
+          + external = 3000
+          + internal = 3000
+          + ip       = "0.0.0.0"
+          + protocol = "tcp"
+        }
+    }
+
+  # docker_image.my_app will be created
+  + resource "docker_image" "my_app" {
+      + id          = (known after apply)
+      + image_id    = (known after apply)
+      + name        = "node"
+      + repo_digest = (known after apply)
+    }
+
+  # null_resource.build_docker_image will be created
+  + resource "null_resource" "build_docker_image" {
+      + id = (known after apply)
+    }
+
+Plan: 3 to add, 0 to change, 0 to destroy.
+null_resource.build_docker_image: Creating...
+null_resource.build_docker_image: Provisioning with 'local-exec'...
+null_resource.build_docker_image (local-exec): Executing: ["cmd" "/C" "docker build -t node -f Dockerfile ."]
+null_resource.build_docker_image (local-exec): #0 building with "desktop-linux" instance using docker driver
+
+null_resource.build_docker_image (local-exec): #1 [internal] load build definition from Dockerfile
+null_resource.build_docker_image (local-exec): #1 transferring dockerfile: 485B 0.0s done
+null_resource.build_docker_image (local-exec): #1 DONE 0.0s
+
+null_resource.build_docker_image (local-exec): #2 [internal] load metadata for docker.io/library/node:18-alpine
+null_resource.build_docker_image (local-exec): #2 ...
+
+null_resource.build_docker_image (local-exec): #3 [auth] library/node:pull token for registry-1.docker.io
+null_resource.build_docker_image (local-exec): #3 DONE 0.0s
+
+null_resource.build_docker_image (local-exec): #2 [internal] load metadata for docker.io/library/node:18-alpine
+null_resource.build_docker_image (local-exec): #2 DONE 2.6s
+
+null_resource.build_docker_image (local-exec): #4 [internal] load .dockerignore
+null_resource.build_docker_image (local-exec): #4 transferring context: 107B 0.0s done
+null_resource.build_docker_image (local-exec): #4 DONE 0.0s
+
+null_resource.build_docker_image (local-exec): #5 [internal] load build context    
+null_resource.build_docker_image (local-exec): #5 transferring context: 5.18kB 0.0s done
+null_resource.build_docker_image (local-exec): #5 DONE 0.0s
+
+null_resource.build_docker_image (local-exec): #6 [1/5] FROM docker.io/library/node:18-alpine@sha256:e0340f26173b41066d68e3fe9bfbdb6571ab3cad0a4272919a52e36f4ae56925 
+null_resource.build_docker_image (local-exec): #6 resolve docker.io/library/node:18-alpine@sha256:e0340f26173b41066d68e3fe9bfbdb6571ab3cad0a4272919a52e36f4ae56925 0.0s done
+null_resource.build_docker_image (local-exec): #6 DONE 0.0s
+
+null_resource.build_docker_image (local-exec): #7 [2/5] WORKDIR /app
+null_resource.build_docker_image (local-exec): #7 CACHED
+
+null_resource.build_docker_image (local-exec): #8 [3/5] COPY package.json package-lock.json ./
+null_resource.build_docker_image (local-exec): #8 CACHED
+
+null_resource.build_docker_image (local-exec): #9 [4/5] RUN npm install
+null_resource.build_docker_image (local-exec): #9 CACHED
+
+null_resource.build_docker_image (local-exec): #10 [5/5] COPY . .
+null_resource.build_docker_image (local-exec): #10 DONE 0.0s
+
+null_resource.build_docker_image (local-exec): #11 exporting to image
+null_resource.build_docker_image (local-exec): #11 exporting layers 0.1s done      
+null_resource.build_docker_image (local-exec): #11 exporting manifest sha256:b3029a17a69cabe20592fc59966bda88e6d6c478b518eb219ef44563288559af 0.0s done
+null_resource.build_docker_image (local-exec): #11 exporting config sha256:46aae5fdc398de3f1d34ceba688d40a10a5b61c42694c8aa208ee3834560e9cb 0.0s done
+null_resource.build_docker_image (local-exec): #11 exporting attestation manifest sha256:e818690dda6274dbe471482f9ed1af7c9cea76ccd10d6851f13320f7c64b57ee 0.0s done   
+null_resource.build_docker_image (local-exec): #11 exporting manifest list sha256:5f837d75c51cd1961bf4480cf8c593740871918ca85489e8a38cd0788f158e18 0.0s done
+null_resource.build_docker_image (local-exec): #11 naming to docker.io/library/node:latest
+null_resource.build_docker_image (local-exec): #11 naming to docker.io/library/node:latest done
+null_resource.build_docker_image (local-exec): #11 unpacking to docker.io/library/node:latest
+null_resource.build_docker_image (local-exec): #11 unpacking to docker.io/library/node:latest 0.3s done
+null_resource.build_docker_image (local-exec): #11 DONE 0.6s
+
+null_resource.build_docker_image (local-exec): View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/l37fj8lzbub7h16fcmw7r65nq
+null_resource.build_docker_image: Creation complete after 4s [id=1151411389182719446]
+docker_image.my_app: Creating...
+docker_image.my_app: Creation complete after 1s [id=sha256:5f837d75c51cd1961bf4480cf8c593740871918ca85489e8a38cd0788f158e18node]
+docker_container.my_container: Creating...
+docker_container.my_container: Creation complete after 1s [id=4bb6067cbf5698e319d61a3cc260a4dc545b6e101600113b88b91a5205bda539]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+PS C:\Users\NURIN\Downloads\devopstest> 
